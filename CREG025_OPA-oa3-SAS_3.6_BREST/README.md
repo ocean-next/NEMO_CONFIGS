@@ -69,12 +69,7 @@ time to complete the```OASIS``` and```XIOS``` paths according to your new OASIS 
 XIOS install...
 The relevant ARCH file for DATARMOR is provided here:```compilation/NEMOGCM/arch-DATARMOR_OA3.fcm```
 
-Now, in the NEMOGCM/CONFIG directory, add the 2 new entries for the two
-executables to compile into file 
-
-    cd ./CONFIG/
-
-In```CONFIG``` add eveything you find here in```sources/CONFIG```, namely: 
+Now, in your ```NEMOGCM/CONFIG/``` directory,  add everything you find here in ```sources/CONFIG/```, namely: 
 
     cfg.txt CREG025_OPA CREG025_SAS_LIM3
 
@@ -83,10 +78,10 @@ In```CONFIG``` add eveything you find here in```sources/CONFIG```, namely:
     CREG025_OPA OPA_SRC
     CREG025_SAS_LIM3 OPA_SRC SAS_SRC LIM_SRC_3
 
-What we shall compile into```CREG025_OPA``` will eventually become```opa.exe``` and what we shall compile into```CREG025_SAS_LIM3``` will become```sas.exe```.
+What we shall compile into```CREG025_OPA``` and ```CREG025_SAS_LIM3``` will eventually become ```opa.exe``` and ```sas.exe```, respectively.
 
 
-**IPORTANT: the```MY_SRC``` directories found under both```CREG025_OPA``` and```CREG025_SAS_LIM3``` contains the "LOPS version" source modifications with respect to the reference NEMOGCM they used plus the "OASIS-SAS" modifications that I merged in as well!**
+**IMPORTANT: the```MY_SRC``` directories found under both```CREG025_OPA``` and```CREG025_SAS_LIM3``` contains the "LOPS version" source modifications with respect to the reference NEMOGCM they used plus the "OASIS-SAS" modifications that I merged in as well!**
 Same for the```CPP key``` file in each directory. Having a look at these ```CPP key``` files might give you a hint on what we really
 do... Like for instance,```key_lim3``` is obviously only used for the```CREG025_SAS_LIM3``` config.
 
@@ -130,7 +125,7 @@ All the netcdf files (mainly those I got from Claude) are in there:
 
     datarmor:/home3/datawork/lbrodeau/CREG025/CREG025-I
 
-Also these 3 sub-directories:
+Including the 3 following sub-directories:
 - ```BDY``` contains the boundary conditions
 - ```FATM``` contains the atmospheric forcing and associated remapping weights
 - ```OASIS``` contains the initial ocean and ice states needed for OASIS (relevance of fields in them has no importance)
@@ -141,10 +136,14 @@ Also these 3 sub-directories:
 
 #### 2.2 Namelists and XIOS xml files
 
-The appropriate namelists for opa.exe, sas.exe and OASIS, respectively as well as all the XML files for XIOS:
-     namelist_cfg & namelist_ref, namelist_sas_cfg & namelist_sas_ref & namelist_ice_cfg & namelist_ice_ref, namcouple
+The appropriate namelists for opa.exe, sas.exe and OASIS, respectively; as well as all the XML files for XIOS are to be found here in:```namelists/```:
 
-are to be found here in:```namelists```
+     iodef.xml [general]
+     namelist_cfg, namelist_ref, domain_def_opa.xml, field_def_opa.xml, file_def_opa.xml [OPA]
+     namelist_sas_cfg, namelist_sas_ref, namelist_ice_cfg, namelist_ice_ref, domain_def_sas.xml, field_def_sas.xml, file_def_sas.xml [SAS]
+     namcouple [OASIS]
+
+
 
 
 ***
@@ -152,81 +151,34 @@ are to be found here in:```namelists```
 
 #### 2.3 Launching the beast
 
-An example (I have no idea if it is the right ratio of processes for OPA/SAS) :
+The "cheap" setup I tested on DATARMOR (28 cores in total = 1 full node):
 
-    mpirun -np 25 ./opa.exe : -np 16 ./sas.exe : -np 1 ./xios_server.exe
-
-(we have nodes with 48 cores on Marenostrum, that's why. Otherwize I would tend
-to use less of course...
+    mpiexec.hydra -n 1 ./xios_server.exe : -n 15 ./opa.exe : -n 12 ./sas.exe
 
 Of course mind the cpu decomposition according to the number of cores you use
 for each component.
 
-In this particular case, for```opa.exe```, in namelist_cfg, I have:
+In this particular case, for```opa.exe```, in ```namelist_cfg```, I have:
 
     &nammpp
-    jpni=5
+    jpni=3
     jpnj=5
-    jpnij=25
+    jpnij=15
     /
 
-for```sas.exe```, in namelist_sas_cfg, I have:
+For```sas.exe```, in ```namelist_sas_cfg```, I have:
 
     &nammpp
-    jpni=4
+    jpni=3
     jpnj=4
-    jpnij=16
+    jpnij=12
     /
 
-*HEXAGON update:*
 
-There are 16 cores per node, and apparently```aprun``` which replace```mpirun``` on Cray machines doesn't like to mix different executables on the same node. So I use 1 node for opa.exe, 1 for sas.exe and a third one for xios_server.exe (only using 4 cores on this 3rd node though). The launch command looks like this:
+*Run directory on DATARMOR where the successful execution of 5 model days was performed:*
 
-    aprun -n 16 ./opa.exe : -n 16 ./sas.exe : -n 4 ./xios_server.exe
+    dartarmor:/home3/scratch/lbrodeau/tmp/CREG025_SASOA3/CREG025_SASOA3-ILBOOSCT_prod
 
-In terms of namelist that just means that for both OPA and SAS we have:
-
-    &nammpp
-    jpni=4
-    jpnj=4
-    jpnij=16
-    /
-
-The SLURM script batch script```run_CREG025_SASOA3-SOAN100HX.sub``` I use to launch the run looks like this:
-
-	#!/bin/bash                                                                                                                       
-	#SBATCH -J SOAN100HX                                                                                                              
-	#SBATCH -N 3                                                                                                                      
-	#SBATCH -n 48                                                                                                                     
-	#SBATCH -o out_CREG025_SASOA3-SOAN100HX_20100101_20101231_00036.out                                                                
-	#SBATCH -e err_CREG025_SASOA3-SOAN100HX_20100101_20101231_00036.err                                                                
-	#SBATCH -t 00:59:00                                                                                                               
-	
-	ulimit -s unlimited
-	
-	echo
-	
-	list_nodes_c=`scontrol show hostname  | paste -d, -s`
-	list_nodes=`echo ${list_nodes_c} | sed -e s/','/' '/g`
-	
-	echo
-	echo "  *** JOB ID => ${SLURM_JOB_ID} "
-	echo "  *** Nodes to be booked: ${list_nodes} !"
-	
-	cd /work/users/lbr074/simus/tmp/CREG025_SASOA3/CREG025_SASOA3-SOAN100HX_prod/ ; # My production directory...
-	
-	echo; echo "In `pwd`"; echo; \ls -l; echo
-	
-	CMD="aprun -n 16 ./opa.exe : -n 16 ./sas.exe : -n 4 ./xios_server.exe"
-	
-	echo ${CMD}
-	${CMD}
-	
-	exit
-
-To be launched like:
-
-    sbatch ./run_CREG025_SASOA3-SOAN100HX.sub
 
 ***
 ***
