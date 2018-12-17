@@ -83,12 +83,11 @@ In```CONFIG``` add eveything you find here in```sources/CONFIG```, namely:
     CREG025_OPA OPA_SRC
     CREG025_SAS_LIM3 OPA_SRC SAS_SRC LIM_SRC_3
 
-What we shall compile into```CREG025_OPA``` will eventually become```opa.exe``` and what we shall compile into```CREG025_SAS_LIM3``` will become```sas.exe```. So:
+What we shall compile into```CREG025_OPA``` will eventually become```opa.exe``` and what we shall compile into```CREG025_SAS_LIM3``` will become```sas.exe```.
 
 
-**IPORTANT: the```MY_SRC``` directories found under both```CREG025_OPA``` and```CREG025_SAS_LIM3``` contains the "LOPS version" source modifications with respect to the reference NEMOGCM they used plus the "OASIS-SAS" modifications that I merged in as well!
-**
-Same for the```CPP key``` file in each directory, it might give you a hint on what we really
+**IPORTANT: the```MY_SRC``` directories found under both```CREG025_OPA``` and```CREG025_SAS_LIM3``` contains the "LOPS version" source modifications with respect to the reference NEMOGCM they used plus the "OASIS-SAS" modifications that I merged in as well!**
+Same for the```CPP key``` file in each directory. Having a look at these ```CPP key``` files might give you a hint on what we really
 do... Like for instance,```key_lim3``` is obviously only used for the```CREG025_SAS_LIM3``` config.
 
 So now you just have to compile two```nemo.exe``` and rename them accordingly:
