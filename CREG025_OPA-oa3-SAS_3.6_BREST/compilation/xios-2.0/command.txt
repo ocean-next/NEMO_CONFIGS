@@ -1,0 +1,1 @@
+        ./make_xios --arch DATARMOR --prod --full --use_oasis oasis3_mct --netcdf_lib netcdf4_seq --job 5

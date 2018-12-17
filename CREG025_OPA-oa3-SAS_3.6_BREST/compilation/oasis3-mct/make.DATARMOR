@@ -1,0 +1,70 @@
+#
+# Include file for OASIS3 Makefile for a Linux system using 
+# Portland Group Fortran Compiler and MPICH
+#
+###############################################################################
+#
+# CHAN	: communication technique used in OASIS3 (MPI1/MPI2)
+CHAN            = MPI1
+#
+# Paths for libraries, object files and binaries
+#
+# COUPLE	: path for oasis3-mct main directory
+COUPLE          = $(HOME)/DEV/oasis3-mct
+#
+# ARCHDIR       : directory created when compiling
+##ARCHDIR         = $(HOME)/tmp/oasis3-mct
+ARCHDIR         = $(HOME)/DEV/oasis3-mct
+#
+# MPI library
+MPIDIR      = $(INTEL_MPI_PATH)
+MPIBIN      = 
+MPI_INCLUDE = $(MPIDIR)/include
+MPILIB      = -L$(MPIDIR)/lib
+
+# NETCDF library
+### NETCDF_DIR     = $(NETCDF_DIR)
+NETCDF_INC_DIR = $(NETCDF_DIR)/include/
+NETCDF_LIBRARY = -L$(NETCDF_DIR)/lib -lnetcdff -lnetcdf
+
+# Compiling and other commands
+MAKE        = make
+##F90         = mpiifort -I$(NETCDF_INC_DIR) -I$(ARCHDIR)/build/lib/psmile.MPI1
+F90         = mpiifort
+F           = mpiifort
+f90         = mpiifort
+f           = mpiifort
+#CC      = mpiicc -I$(NETCDF_INC_DIR)
+CC      = mpiicc
+#LD      = mpiifort $(NETCDF_LIBRARY)
+LD      = mpiifort
+AR      = ar
+ARFLAGS = curv
+
+# CPP keys and compiler options
+ 
+# CPP/FPP macros
+MACROS   := use_libMPI use_comm_$(CHAN) use_netCDF TREAT_OVERLAY
+MACROS   += 
+
+# Compiler options
+F90FLAGS := -O2 -fp-model precise -xHost -g -traceback -r8 -diag-disable=remark
+F90FLAGS += -132 -check pointers -check uninit -diag-disable=remark
+F90FLAGS += $(addprefix -D,$(MACROS))
+###F90FLAGS += $(addprefix -I,$(MPI_INCLUDE))
+F90FLAGS += $(addprefix -I,$(NETCDF_INCLUDE))
+
+f90FLAGS := $(F90FLAGS)
+FFLAGS   := $(F90FLAGS)
+fFLAGS   := $(F90FLAGS)
+
+CCFLAGS  := -O2 -fp-model precise -xHost -g -traceback -diag-disable=remark
+CCFLAGS  += $(addprefix -D,$(MACROS))
+CCFLAGS  := $(addprefix -I,$(MPI_INCLUDE))
+CCFLAGS  += $(addprefix -I,$(NETCDF_INCLUDE))
+
+LDFLAGS  := -O2 -fp-model precise -xHost -g -traceback -diag-disable=remark
+LDFLAGS  += 
+
+# MPP_IOOPT needed for compiling mpp_io
+MPP_IOOPT :=

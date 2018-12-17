@@ -1,0 +1,22 @@
+# Intel(R) 64, Version 18.0.3
+
+%CCOMPILER      mpiicc
+%FCOMPILER      mpiifort
+%LINKER         mpiifort -nofor-main
+
+%BASE_CFLAGS    -ansi -w
+%PROD_CFLAGS    -O2 -g -traceback -DBOOST_DISABLE_ASSERTS
+%DEV_CFLAGS     -g -O2 -g -traceback -fp-model precise -xHOST
+%DEBUG_CFLAGS   -g 
+
+%BASE_FFLAGS    -D__NONE__ 
+%PROD_FFLAGS    -O2 -g -traceback -r8
+%DEV_FFLAGS     -g -O2 -g -traceback -r8
+%DEBUG_FFLAGS   -g 
+
+%BASE_INC       -D__NONE__
+%BASE_LD        -lstdc++
+
+%CPP            cpp
+%FPP            fpp
+%MAKE           make
