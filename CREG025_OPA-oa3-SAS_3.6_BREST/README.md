@@ -141,24 +141,11 @@ Also these 3 sub-directories:
 
 #### 2.2 Namelists and XIOS xml files
 
-The appropriate namelists for opa.exe, sas.exe and OASIS, respectively:
+The appropriate namelists for opa.exe, sas.exe and OASIS, respectively as well as all the XML files for XIOS:
+     namelist_cfg & namelist_ref, namelist_sas_cfg & namelist_sas_ref & namelist_ice_cfg & namelist_ice_ref, namcouple
 
-    namelist_cfg & namelist_ref, namelist_sas_cfg & namelist_sas_ref & namelist_ice_cfg & namelist_ice_ref, namcouple
+are to be found here in:```namelists```
 
-are to be found in the google drive directory```CREG025_OPA_OA3_SASLIM3_CTRL_nemo_3.6``` in :
-
-    NEMO_stuff/NEMO_CONFIG_CTRL/CREG025/
-
-Link: https://drive.google.com/open?id=1CfT0F-_9CZpA0MAApGw33bEhAXfATvy8
-
-All XML files for XIOS are in the same directory...
-
-
-*HEXAGON update:*
-
-Check my own production directory in which the setup worked okay:
-
-    /work/users/lbr074/simus/tmp/CREG025_SASOA3/CREG025_SASOA3-SOAN100HX_prod/
 
 ***
 ***
