@@ -1,0 +1,213 @@
+<!--
+    ============================================================================================================
+    =                                           output files definition                                        =
+    =                                            Define your own files                                         =
+    =                                         put the variables you want...                                    =
+    ============================================================================================================
+-->
+
+<!-- <file_definition type="one_file" name="@expname@_@freq@_@startdate@_@enddate@" sync_freq="1d" min_digits="4"> -->
+<file_definition type="multiple_file" name="@expname@_@freq@_@startdate@_@enddate@" sync_freq="1d" min_digits="4">
+
+  <file_group id="2h" output_freq="2h"  output_level="10" enabled=".TRUE."/> <!-- 2h files -->
+
+
+
+  <file_group id="3h" output_freq="3h"  output_level="10" enabled=".TRUE." > <!-- 3h files -->
+
+    <!-- ########    INTEGRATED-VARIABLES    ########  -->
+    <file id="file7" name_suffix="_SBC_scalar" description="scalar variables" >
+      <field field_ref="ibgvol_tot"    name="ibgvoltot"    long_name="global mean ice volume"        />
+      <field field_ref="sbgvol_tot"    name="sbgvoltot"    long_name="global mean snow volume"       />
+      <field field_ref="ibgarea_tot"   name="ibgarea"      long_name="global mean ice area"          />
+      <field field_ref="ibgheat_tot"   name="ibgheatco"    long_name="global mean ice heat content"  />
+      <field field_ref="ibgsalt_tot"   name="ibgsaltco"    long_name="global mean ice salt content"  />
+      <field field_ref="sbgheat_tot"   name="sbgheatco"    long_name="global mean snow heat content" />
+
+      <variable name="start_date"       type="int">19590101    </variable>
+      <variable name="output_frequency" type="string">1mo      </variable>
+      <variable name="CONFIG"           type="string">CREG025.L75 </variable>
+      <variable name="CASE"             type="string">BCTGE27SSSICE   </variable>
+    </file>
+    <file id="file8" name_suffix="_OCE_scalar" description="scalar variables" >
+      <field field_ref="sshtot"        name="sshtot"       long_name="global mean ssh"               />
+
+      <variable name="start_date"       type="int">19590101    </variable>
+      <variable name="output_frequency" type="string">1mo      </variable>
+      <variable name="CONFIG"           type="string">CREG025.L75 </variable>
+      <variable name="CASE"             type="string">BCTGE27SSSICE   </variable>
+    </file>
+
+
+    <!-- ########    U-GRID    ########  -->
+    <file id="file2" name_suffix="_gridU-SAS" description="ocean U grid variables" >
+      <field field_ref="utau"         name="sozotaux"       long_name="surface_downward_x_stress" />
+      <field field_ref="utau_atmoce"     name="utau_atmoce"       long_name="open_ocean_downward_x_stress" />
+      <field field_ref="utau_iceoce"     name="utau_iceoce"       long_name="ice_ocean_downward_x_stress" />
+      <field field_ref="uwspd10"      name="uwspd10"        long_name="U wind speed at 10m" />
+
+      <variable name="start_date"       type="int">19590101    </variable>
+      <variable name="output_frequency" type="string">1m       </variable>
+      <variable name="CONFIG"           type="string">CREG025.L75 </variable>
+      <variable name="CASE"             type="string">BCTGE27SSSICE   </variable>
+    </file>
+
+    <!-- ########    V-GRID    ########  -->
+    <file id="file3" name_suffix="_gridV-SAS" description="ocean V grid variables" >
+      <field field_ref="vtau"         name="sometauy"       long_name="surface_downward_y_stress" />
+      <field field_ref="vtau_atmoce"     name="vtau_atmoce"       long_name="open_ocean_downward_y_stress" />
+      <field field_ref="vtau_iceoce"     name="vtau_iceoce"       long_name="ice_ocean_downward_y_stress" />
+      <field field_ref="vwspd10"      name="vwspd10"        long_name="V wind speed at 10m" />
+
+      <variable name="start_date"       type="int">19590101    </variable>
+      <variable name="output_frequency" type="string">1m       </variable>
+      <variable name="CONFIG"           type="string">CREG025.L75 </variable>
+      <variable name="CASE"             type="string">BCTGE27SSSICE   </variable>
+    </file>
+
+
+    <!-- ########    FLXT-GRID    ########  -->
+    <file id="file5" name_suffix="_flxT-SAS" description="surface fluxes variables" > <!-- time step automaticaly defined based on nn_fsbc -->
+      <field field_ref="empmr"        name="empmr"      long_name="water_flux_into_sea_water"                     />
+      <field field_ref="emp_oce"      name="emp_oce"    long_name="Evap minus Precip over ocean"                  />
+      <field field_ref="emp_ice"      name="emp_ice"    long_name="Evap minus Precip over ice"                    />
+      <field field_ref="fmmflx"       name="fmmflx"     long_name="Water flux due to freezing/melting"            />
+      <field field_ref="snowpre"      name="snowpre"    long_name="Snow precipitation"                            />
+      <field field_ref="runoffs"      name="runoffs"    long_name="River Runoffs"                                 />
+      <field field_ref="precip"       name="precip"     long_name="Total precipitation"                           />
+
+      <field field_ref="qt"           name="qt"         long_name="Net Downward Heat Flux"                        />
+      <field field_ref="qns"          name="nshfls"     long_name="surface_net_downward_non_solar_flux" level="1" />
+      <field field_ref="qsr"          name="rsntds"     long_name="surface_net_downward_shortwave_flux" level="1" />
+      <field field_ref="erp"          name="wfcorr"     long_name="water_flux_correction"               level="1" />
+      <field field_ref="taum"         name="taum"       long_name="wind stress module"                            />
+      <field field_ref="wspd"         name="windsp"     long_name="wind speed module"                             />
+
+      <field field_ref="qlw_oce"       name="qlw_oce"    long_name="Longwave Downward Heat Flux over open ocean"  />
+      <field field_ref="qsb_oce"       name="qsb_oce"    long_name="Sensible Downward Heat Flux over open ocean"  />
+      <field field_ref="qla_oce"       name="qla_oce"    long_name="Latent Downward Heat Flux over open ocean"    />
+      <field field_ref="qemp_oce"      name="qemp_oce"   long_name="Downward Heat Flux from E-P over open ocean"  />
+      <field field_ref="qemp_ice"      name="qemp_ice"   long_name="Downward Heat Flux from E-P over ice"         />
+      <field field_ref="taum_oce"      name="taum_oce"   long_name="wind stress module over open ocean"           />
+
+      <field field_ref="qsr_oce"      name="qsr_oce"    long_name="downward shortwave flux at ocean surface"      />
+      <field field_ref="qsr_ice"      name="qsr_ice"    long_name="downward shortwave flux at ice surface"        />
+      <field field_ref="qns_oce"      name="qns_oce"    long_name="downward non solar flux at ocean surface"      />
+      <field field_ref="qns_ice"      name="qns_ice"    long_name="downward non solar flux at ice surface"        />
+      <field field_ref="qt_oce"       name="qt_oce"     long_name="downward total flux at ocean surface"          />
+      <field field_ref="qt_ice"       name="qt_ice"     long_name="downward total flux at ice surface"            />
+      <field field_ref="qtr_ice"      name="qtr_ice"    long_name="shortwave flux transmitted through the ice"    />
+
+      <field field_ref="sfxbri"       name="sfxbri"     long_name="brine salt flux"                         />
+      <field field_ref="sfxdyn"       name="sfxdyn"     long_name="salt flux from ridging rafting"          />
+      <field field_ref="sfxres"       name="sfxres"     long_name="salt flux from lipupdate (resultant)"    />
+      <field field_ref="sfxbog"       name="sfxbog"     long_name="salt flux from bot growth"               />
+      <field field_ref="sfxbom"       name="sfxbom"     long_name="salt flux from bot melt"                 />
+      <field field_ref="sfxsum"       name="sfxsum"     long_name="salt flux from surf melt"                />
+      <field field_ref="sfxsni"       name="sfxsni"     long_name="salt flux from snow-ice formation"       />
+      <field field_ref="sfxopw"       name="sfxopw"     long_name="salt flux from open water ice formation" />
+      <field field_ref="sfxsub"       name="sfxsub"     long_name="salt flux from sublimation"              />
+      <field field_ref="sfxlam"       name="sfxlam"     long_name="salt flux from lateral melting"          />
+      <field field_ref="sfx"          name="sfx"        long_name="salt flux total"                         />
+
+      <field field_ref="hfxsum"       name="hfxsum"       long_name="heat fluxes causing surface ice melt"          />
+      <field field_ref="hfxbom"       name="hfxbom"       long_name="heat fluxes causing bottom ice melt"           />
+      <field field_ref="hfxbog"       name="hfxbog"       long_name="heat fluxes causing bottom ice growth"         />
+      <field field_ref="hfxdif"       name="hfxdif"       long_name="heat fluxes causing ice temperature change"    />
+      <field field_ref="hfxopw"       name="hfxopw"       long_name="heat fluxes causing open water ice formation"  />
+      <field field_ref="hfxout"       name="hfxout"       long_name="total heat fluxes received by the ocean"       />
+      <field field_ref="hfxin"        name="hfxin"        long_name="total heat fluxes at the ice/ocean surface"    />
+      <field field_ref="hfxsnw"       name="hfxsnw"       long_name="heat fluxes causing snow melt"                 />
+      <field field_ref="hfxerr"       name="hfxerr"       long_name="heat fluxes error after heat diffusion"        />
+      <field field_ref="hfxerr_rem"   name="hfxerr_rem"   long_name="heat fluxes error after remapping"             />
+      <!-- ice-ocean heat flux from mass exchange -->
+      <field field_ref="hfxdyn"       name="hfxdyn"       long_name="heat fluxes from ice-ocean mass exchange during dynamic"    />
+      <field field_ref="hfxres"       name="hfxres"       long_name="heat fluxes from ice-ocean mass exchange during resultant"  />
+      <field field_ref="hfxthd"       name="hfxthd"       long_name="heat fluxes from ice-ocean mass exchange during thermo"     />
+      <!-- ice-atm. heat flux from mass exchange -->
+      <field field_ref="hfxsub"       name="hfxsub"       long_name="heat fluxes from ice-atm. mass exchange during sublimation" />
+      <field field_ref="hfxspr"       name="hfxspr"       long_name="heat fluxes from ice-atm. mass exchange during snow precip" />
+      <!-- diags -->
+      <field field_ref="hfxdhc"       name="hfxdhc"       long_name="Heat content variation in snow and ice"  />
+      <field field_ref="hfxtur"       name="hfxtur"       long_name="turbulent heat flux at the ice base"     />
+
+      <field field_ref="vfxsum"        name="vfxsum"       long_name="surface melt"                            />
+      <field field_ref="vfxbom"        name="vfxbom"       long_name="bottom melt"                             />
+      <field field_ref="vfxice"        name="vfxice"       long_name="ice melt/growth"                         />
+      <field field_ref="vfxsnw"        name="vfxsnw"       long_name="snow melt/growth"                         />
+      <field field_ref="vfxsub"        name="vfxsub"       long_name="snow sublimation"                         />
+      <field field_ref="vfxlam"        name="vfxlam"       long_name="lateral melting "                         />
+      <field field_ref="vfxsub_err"    name="vfxsub_err"   long_name="excess of snow sublimation sent to ocean" />
+      <field field_ref="vfxspr"        name="vfxspr"       long_name="snow precipitation on ice"                />
+
+      <variable name="start_date"       type="int">19590101    </variable>
+      <variable name="output_frequency" type="string">1m       </variable>
+      <variable name="CONFIG"           type="string">CREG025.L75 </variable>
+      <variable name="CASE"             type="string">BCTGE27SSSICE   </variable>
+    </file>
+
+    <!-- ########    ICEMOD-GRID    ########  -->
+    <file id="file6" name_suffix="_icemod" description="ice variables"  >
+      <field field_ref="icevolu"          name="sivolu"     long_name="ice volume"     />
+      <field field_ref="snowvol"          name="snvolu"     long_name="snow volume"    />
+
+      <field field_ref="micet"            name="sitemp"     long_name="Mean ice temperature"  />
+      <field field_ref="micesalt"         name="sisali"     long_name="Mean ice salinity"     />
+      <field field_ref="miceage"          name="siages"     long_name="Mean ice age"          />
+
+      <field field_ref="iceconc"          name="siconc"     long_name="ice concentration"     />
+      <field field_ref="icethic_cea"      name="sithic"     long_name="Ice thickness (cell average)"       />
+      <field field_ref="snowthic_cea"     name="snthic"     long_name="Snow thickness (cell average)"      />
+
+      <field field_ref="iceage_cat"       name="siagecat"   long_name="Ice age for categories"             />
+      <field field_ref="iceconc_cat"      name="siconcat"   long_name="Ice concentration for categories"   />
+      <field field_ref="icethic_cat"      name="sithicat"   long_name="Ice thickness for categories"       />
+      <field field_ref="snowthic_cat"     name="snthicat"   long_name="Snow thickness for categories"      />
+
+      <field field_ref="uice_ipa"         name="sivelu"     long_name="Ice velocity along i-axis at I-point (ice presence average)" />
+      <field field_ref="vice_ipa"         name="sivelv"     long_name="Ice velocity along j-axis at I-point (ice presence average)" />
+      <field field_ref="utau_ice"         name="iicestru"   long_name="Wind stress along i-axis over the ice at i-point"  />
+      <field field_ref="vtau_ice"         name="iicestrv"   long_name="Wind stress along j-axis over the ice at i-point"  />
+      <field field_ref="icevel"           name="sivelo"     long_name="ice velocity"   />
+      <field field_ref="icestr"           name="sistre"     long_name="ice strength"   />
+      <field field_ref="idive"            name="sidive"     long_name="divergence"     />
+      <field field_ref="ishear"           name="sishea"     long_name="shear"          />
+
+      <variable name="start_date"       type="int">19590101    </variable>
+      <variable name="output_frequency" type="string">1m       </variable>
+      <variable name="CONFIG"           type="string">CREG025.L75 </variable>
+      <variable name="CASE"             type="string">BCTGE27SSSICE   </variable>
+    </file>
+
+  </file_group>
+
+
+
+
+
+  <file_group id="4h" output_freq="4h"  output_level="10" enabled=".TRUE."/> <!-- 4h files -->
+  <file_group id="6h" output_freq="6h"  output_level="10" enabled=".TRUE."/> <!-- 6h files -->
+  <file_group id="1d" output_freq="1d"  output_level="10" enabled=".TRUE."/> <!-- 1d files -->
+
+
+
+
+
+
+  <file_group id="1mo" output_freq="1mo" output_level="10" enabled=".TRUE."/> <!-- real monthly files -->
+
+
+  <file_group id="1m" output_freq="1mo" split_freq="1mo" output_level="10" enabled=".TRUE."/>  <!-- 1m files -->
+
+
+  <file_group id="2m" output_freq="2mo" output_level="10" enabled=".TRUE."/> <!-- real 2m files -->
+  <file_group id="3m" output_freq="3mo" output_level="10" enabled=".TRUE."/> <!-- real 3m files -->
+  <file_group id="4m" output_freq="4mo" output_level="10" enabled=".TRUE."/> <!-- real 4m files -->
+  <file_group id="6m" output_freq="6mo" output_level="10" enabled=".TRUE."/> <!-- real 6m files -->
+
+  <file_group id="1y"  output_freq="1y" output_level="10" enabled=".TRUE."/> <!-- real yearly files -->
+  <file_group id="2y"  output_freq="2y" output_level="10" enabled=".TRUE."/> <!-- real 2y files -->
+  <file_group id="5y"  output_freq="5y" output_level="10" enabled=".TRUE."/> <!-- real 5y files -->
+  <file_group id="10y" output_freq="10y" output_level="10" enabled=".TRUE."/> <!-- real 10y files -->
+
+</file_definition>

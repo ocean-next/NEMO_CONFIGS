@@ -1,0 +1,87 @@
+
+   <domain_definition>
+     <domain_group id="grid_T">
+       <domain id="grid_T" long_name="grid T"/>
+       <!--   Mooring in the Arctic basin -->
+       <domain id="moor_NABOS_M1_T" domain_ref="grid_T"> <zoom_domain ibegin="351" jbegin="495" ni="1" nj="1"/>  </domain>
+       <domain id="moor_NABOS_M2_T" domain_ref="grid_T"> <zoom_domain ibegin="321" jbegin="497" ni="1" nj="1"/>  </domain>
+       <domain id="moor_NABOS_M3_T" domain_ref="grid_T"> <zoom_domain ibegin="345" jbegin="367" ni="1" nj="1"/>  </domain>
+       <domain id="moor_NPEO_T"     domain_ref="grid_T"> <zoom_domain ibegin="288" jbegin="417" ni="1" nj="1"/>  </domain>
+       <domain id="moor_BG_A_T"     domain_ref="grid_T"> <zoom_domain ibegin="193" jbegin="516" ni="1" nj="1"/>  </domain>
+       <domain id="moor_BG_B_T"     domain_ref="grid_T"> <zoom_domain ibegin="210" jbegin="496" ni="1" nj="1"/>  </domain>
+       <domain id="moor_BG_C_T"     domain_ref="grid_T"> <zoom_domain ibegin="189" jbegin="489" ni="1" nj="1"/>  </domain>
+       <domain id="moor_BG_D_T"     domain_ref="grid_T"> <zoom_domain ibegin="167" jbegin="508" ni="1" nj="1"/>  </domain>
+       <domain id="myzoom" domain_ref="grid_T" >
+	 <zoom_domain id="myzoom"  ibegin="10" jbegin="10" ni="5" nj="5" />
+       </domain>
+       <domain id="1point" domain_ref="grid_T" >
+	 <zoom_domain id="1point" ibegin="200" jbegin="100" ni="1" nj="1" />
+       </domain>
+         <!--   Eq section   -->
+         <domain id="EqT" domain_ref="grid_T" >
+	   <zoom_domain id="EqT" ibegin="1" jbegin="0000" ni="0000" nj="1" />
+	 </domain>
+      </domain_group>
+
+      <domain_group id="grid_U">
+         <domain id="grid_U" long_name="grid U"/>
+       <!--   Mooring in the Arctic basin -->
+         <domain id="moor_NABOS_M1_U" domain_ref="grid_U"> <zoom_domain ibegin="351" jbegin="495" ni="1" nj="1"/>  </domain>
+         <domain id="moor_NABOS_M2_U" domain_ref="grid_U"> <zoom_domain ibegin="321" jbegin="497" ni="1" nj="1"/>  </domain>
+         <domain id="moor_NABOS_M3_U" domain_ref="grid_U"> <zoom_domain ibegin="345" jbegin="367" ni="1" nj="1"/>  </domain>
+         <domain id="moor_NPEO_U"     domain_ref="grid_U"> <zoom_domain ibegin="288" jbegin="417" ni="1" nj="1"/>  </domain>
+         <domain id="moor_BG_A_U"     domain_ref="grid_U"> <zoom_domain ibegin="193" jbegin="516" ni="1" nj="1"/>  </domain>
+         <domain id="moor_BG_B_U"     domain_ref="grid_U"> <zoom_domain ibegin="210" jbegin="496" ni="1" nj="1"/>  </domain>
+         <domain id="moor_BG_C_U"     domain_ref="grid_U"> <zoom_domain ibegin="189" jbegin="489" ni="1" nj="1"/>  </domain>
+         <domain id="moor_BG_D_U"     domain_ref="grid_U"> <zoom_domain ibegin="167" jbegin="508" ni="1" nj="1"/>  </domain>
+         <domain id="EqU" domain_ref="grid_U" >
+	   <zoom_domain id="EqU" ibegin="1" jbegin="0000" ni="0000" nj="1" /> 
+	 </domain>    
+      </domain_group>
+
+      <domain_group id="grid_V">
+         <domain id="grid_V" long_name="grid V"/>
+       <!--   Mooring in the Arctic basin -->
+         <domain id="moor_NABOS_M1_V" domain_ref="grid_V"> <zoom_domain ibegin="351" jbegin="495" ni="1" nj="1"/>  </domain>
+         <domain id="moor_NABOS_M2_V" domain_ref="grid_V"> <zoom_domain ibegin="321" jbegin="497" ni="1" nj="1"/>  </domain>
+         <domain id="moor_NABOS_M3_V" domain_ref="grid_V"> <zoom_domain ibegin="345" jbegin="367" ni="1" nj="1"/>  </domain>
+         <domain id="moor_NPEO_V"     domain_ref="grid_V"> <zoom_domain ibegin="288" jbegin="417" ni="1" nj="1"/>  </domain>
+         <domain id="moor_BG_A_V"     domain_ref="grid_V"> <zoom_domain ibegin="193" jbegin="516" ni="1" nj="1"/>  </domain>
+         <domain id="moor_BG_B_V"     domain_ref="grid_V"> <zoom_domain ibegin="210" jbegin="496" ni="1" nj="1"/>  </domain>
+         <domain id="moor_BG_C_V"     domain_ref="grid_V"> <zoom_domain ibegin="189" jbegin="489" ni="1" nj="1"/>  </domain>
+         <domain id="moor_BG_D_V"     domain_ref="grid_V"> <zoom_domain ibegin="167" jbegin="508" ni="1" nj="1"/>  </domain>
+         <domain id="EqV" domain_ref="grid_V" >
+	   <zoom_domain id="EqV" ibegin="1" jbegin="0000" ni="0000" nj="1" /> 
+	 </domain>    
+      </domain_group>
+
+      <domain_group id="grid_W">
+         <domain id="grid_W" long_name="grid W"/>
+       <!--   Mooring in the Arctic basin -->
+         <domain id="moor_NABOS_M1_W" domain_ref="grid_W"> <zoom_domain ibegin="351" jbegin="495" ni="1" nj="1"/>  </domain>
+         <domain id="moor_NABOS_M2_W" domain_ref="grid_W"> <zoom_domain ibegin="321" jbegin="497" ni="1" nj="1"/>  </domain>
+         <domain id="moor_NABOS_M3_W" domain_ref="grid_W"> <zoom_domain ibegin="345" jbegin="367" ni="1" nj="1"/>  </domain>
+         <domain id="moor_NPEO_W"     domain_ref="grid_W"> <zoom_domain ibegin="288" jbegin="417" ni="1" nj="1"/>  </domain>
+         <domain id="moor_BG_A_W"     domain_ref="grid_W"> <zoom_domain ibegin="193" jbegin="516" ni="1" nj="1"/>  </domain>
+         <domain id="moor_BG_B_W"     domain_ref="grid_W"> <zoom_domain ibegin="210" jbegin="496" ni="1" nj="1"/>  </domain>
+         <domain id="moor_BG_C_W"     domain_ref="grid_W"> <zoom_domain ibegin="189" jbegin="489" ni="1" nj="1"/>  </domain>
+         <domain id="moor_BG_D_W"     domain_ref="grid_W"> <zoom_domain ibegin="167" jbegin="508" ni="1" nj="1"/>  </domain>
+         <domain id="EqW" domain_ref="grid_W" >
+	   <zoom_domain id="EqW" ibegin="1" jbegin="0000" ni="0000" nj="1" />
+	 </domain>   
+      </domain_group>
+
+      <domain_group id="scalarpoint">
+         <domain id="scalarpoint" long_name="scalar"/>
+         <!-- 
+         <domain id="1point" ibegin="1" jbegin="1" ni="1" nj="1" /> 
+         --> 
+      </domain_group>
+
+        <domain id="ptr" long_name="zonal mean grid" >
+	  <zoom_domain id="ptr" ibegin="0000"  jbegin="1" ni="1" nj="0000" />
+	</domain>  
+
+
+   </domain_definition>    
+ 
