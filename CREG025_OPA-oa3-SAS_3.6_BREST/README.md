@@ -60,7 +60,7 @@ The NEMOGCM version I used is the one provided by Claude, it is located here:
 
     datarmor:/home1/datahome/ctalandi/DEV/NEMODRAK/NEMODRAK_3.6_STABLE_HEAD/NEMOREF/NEMOGCM
 
-Also backed-up as ```3.6r7088``` here:
+The exact same version is also backed-up in my home as ```3.6r7088``` here:
 
     datarmor:/home3/datahome/lbrodeau/DEV/NEMOGCM_3.6r7088
 
