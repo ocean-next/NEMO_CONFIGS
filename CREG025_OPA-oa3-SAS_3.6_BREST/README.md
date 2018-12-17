@@ -16,11 +16,11 @@ OASIS needs to be compiled first because both XIOS and NENO depend on it.
 
     cd oasis3-mct/util/make_dir
 
-Use the```make.DATARMOR``` provided here into```compilation/oasis3-mct/```
+Use the ```make.DATARMOR``` provided here into ```compilation/oasis3-mct/```
     
     make -f TopMakefileOasis3
 
-If everything goes according to plan you should find these in```oasis3-mct/lib/```:
+If everything goes according to plan you should find these in ```oasis3-mct/lib/```:
     
     libmct.a  libmpeu.a  libpsmile.MPI1.a  libscrip.a
 
@@ -34,11 +34,11 @@ If everything goes according to plan you should find these in```oasis3-mct/lib/`
 
 #### 1.2 Compilation of XIOS
 
-I use up-to-date version (r1619) of```xios-2.0``` (100% compatible with XML files of Claude's 3.6 setup):
+I use up-to-date version (r1619) of ```xios-2.0``` (100% compatible with XML files of Claude's 3.6 setup):
 
     svn co http://forge.ipsl.jussieu.fr/ioserver/svn/XIOS/branchs/xios-2.0 xios-2.0_oa3
 
-Copy the 3 DATARMOR-architecture files provided here in```compilation/xios-2.0``` into```arch/``` 
+Copy the 3 DATARMOR-architecture files provided here in ```compilation/xios-2.0``` into ```arch/``` 
 You can compile, just mind the extra oasis-related flag in our particular case:
 
     ./make_xios --arch DATARMOR --prod --full --use_oasis oasis3_mct --netcdf_lib netcdf4_seq --job 6
@@ -54,38 +54,38 @@ You can compile, just mind the extra oasis-related flag in our particular case:
 
 #### 1.3 Compilation of NEMO opa.exe and sas.exe
 
-Now, it's getting trickier since we won't compile a single```nemo.exe``` out of NEMO but one```nemo.exe``` that we shall rename```opa.exe``` and another```nemo.exe``` that we shall rename```sas.exe```.
+Now, it's getting trickier since we won't compile a single ```nemo.exe``` out of NEMO but one ```nemo.exe``` that we shall rename ```opa.exe``` and another ```nemo.exe``` that we shall rename ```sas.exe```.
 
 The NEMOGCM version I used is the one provided by Claude, it is located here:
 
     datarmor:/home1/datahome/ctalandi/DEV/NEMODRAK/NEMODRAK_3.6_STABLE_HEAD/NEMOREF/NEMOGCM
 
-The exact same version is also backed-up in my home as```3.6r7088``` here:
+The exact same version is also backed-up in my home as ```3.6r7088``` here:
 
     datarmor:/home3/datahome/lbrodeau/DEV/NEMOGCM_3.6r7088
 
-As usual create and adapt your own```NEMOGCM/ARCH/arch-YOUR_ARCH.fcm```, mind this
-time to complete the```OASIS``` and```XIOS``` paths according to your new OASIS and
+As usual create and adapt your own ```NEMOGCM/ARCH/arch-YOUR_ARCH.fcm```, mind this
+time to complete the ```OASIS``` and ```XIOS``` paths according to your new OASIS and
 XIOS install...
-The relevant ARCH file for DATARMOR is provided here:```compilation/NEMOGCM/arch-DATARMOR_OA3.fcm```
+The relevant ARCH file for DATARMOR is provided here: ```compilation/NEMOGCM/arch-DATARMOR_OA3.fcm```
 
 Now, in your ```NEMOGCM/CONFIG/``` directory,  add everything you find here in ```sources/CONFIG/```, namely: 
 
     cfg.txt CREG025_OPA CREG025_SAS_LIM3
 
-```cfg.txt``` contains:
+ ```cfg.txt``` contains:
     
     CREG025_OPA OPA_SRC
     CREG025_SAS_LIM3 OPA_SRC SAS_SRC LIM_SRC_3
 
-What we shall compile into```CREG025_OPA``` and ```CREG025_SAS_LIM3``` will eventually become ```opa.exe``` and ```sas.exe```, respectively.
+What we shall compile into ```CREG025_OPA``` and ```CREG025_SAS_LIM3``` will eventually become ```opa.exe``` and ```sas.exe```, respectively.
 
 
-**IMPORTANT: the```MY_SRC``` directories found under both```CREG025_OPA``` and```CREG025_SAS_LIM3``` contains the "LOPS version" source modifications with respect to the reference NEMOGCM they used plus the "OASIS-SAS" modifications that I merged in as well!**
-Same for the```CPP key``` file in each directory. Having a look at these ```CPP key``` files might give you a hint on what we really
-do... Like for instance,```key_lim3``` is obviously only used for the```CREG025_SAS_LIM3``` config.
+**IMPORTANT: the ```MY_SRC``` directories found under both ```CREG025_OPA``` and ```CREG025_SAS_LIM3``` contains the "LOPS version" source modifications with respect to the reference NEMOGCM they used plus the "OASIS-SAS" modifications that I merged in as well!**
+Same for the ```CPP key``` file in each directory. Having a look at these ```CPP key``` files might give you a hint on what we really
+do... Like for instance, ```key_lim3``` is obviously only used for the ```CREG025_SAS_LIM3``` config.
 
-So now you just have to compile two```nemo.exe``` and rename them accordingly:
+So now you just have to compile two ```nemo.exe``` and rename them accordingly:
 
     ./makenemo -m DATARMOR_OA3 -n CREG025_OPA -j 8
     mv -f CREG025_OPA/BLD/bin/nemo.exe CREG025_OPA/BLD/bin/opa.exe
@@ -136,7 +136,7 @@ Including the 3 following sub-directories:
 
 #### 2.2 Namelists and XIOS xml files
 
-The appropriate namelists for opa.exe, sas.exe and OASIS, respectively; as well as all the XML files for XIOS are to be found here in:```namelists/```:
+The appropriate namelists for opa.exe, sas.exe and OASIS, respectively; as well as all the XML files for XIOS are to be found here in: ```namelists/```:
 
      iodef.xml [general]
      namelist_cfg, namelist_ref, domain_def_opa.xml, field_def_opa.xml, file_def_opa.xml [OPA]
@@ -158,7 +158,7 @@ The "cheap" setup I tested on DATARMOR (28 cores in total = 1 full node):
 Of course mind the cpu decomposition according to the number of cores you use
 for each component.
 
-In this particular case, for```opa.exe```, in ```namelist_cfg```, I have:
+In this particular case, for ```opa.exe```, in ```namelist_cfg```, I have:
 
     &nammpp
     jpni=3
@@ -166,7 +166,7 @@ In this particular case, for```opa.exe```, in ```namelist_cfg```, I have:
     jpnij=15
     /
 
-For```sas.exe```, in ```namelist_sas_cfg```, I have:
+For ```sas.exe```, in ```namelist_sas_cfg```, I have:
 
     &nammpp
     jpni=3
