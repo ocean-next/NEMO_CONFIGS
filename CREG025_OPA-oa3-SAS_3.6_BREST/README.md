@@ -126,25 +126,18 @@ In your run directory, before launching the monster you need to have:
 
 #### 2.1 Setup and forcing NetCDF files
 
-All the netcdf files needed are the in tarball```CREG025_DATA_RUNDIR.tar.gz``` in
-this directory on the drive (should replace all previous version):
+All the netcdf files (mainly those I got from Claude) are in there:
 
-    NEMO_stuff/NEMO_CONFIG_DATA/CREG025/
+    datarmor:/home3/datawork/lbrodeau/CREG025/CREG025-I
 
-Link: https://drive.google.com/open?id=1rC8UUsIAQ4YTKAmHp4ZXqo-3qBU8OF4h
-
-NOTE: The files for the DFS5 atmospheric forcing, year 2010 are not included, I assume you
-have them already.
-
-*HEXAGON update:*
-
-On HEXAGON they are installed here:
-
-    /work/users/lbr074/setups/CREG025/CREG025-I
-
+Also these 3 sub-directories:
+- ```BDY``` contains the boundary conditions
+- ```FATM``` contains the atmospheric forcing and associated remapping weights
+- ```OASIS``` contains the initial ocean and ice states needed for OASIS (relevance of fields in them has no importance)
 
 ***
 ***
+
 
 #### 2.2 Namelists and XIOS xml files
 
